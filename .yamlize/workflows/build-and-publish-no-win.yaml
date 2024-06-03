@@ -1,11 +1,11 @@
-name: Build and Test 🛠
+name: Build and Publish 🚀
 
 on:
   workflow_dispatch:
 
 jobs:
   build-artifacts: 
-    import-yaml: yaml/build-artifacts.yaml
+    import-yaml: yaml/build-artifacts-no-win.yaml
 
   build-wasm:
     needs: build-artifacts
@@ -13,4 +13,4 @@ jobs:
 
   prepare-and-publish:
     needs: build-wasm
-    import-yaml: yaml/prepare-and-log.yaml
+    import-yaml: yaml/prepare-and-publish-no-win.yaml

@@ -34,12 +34,15 @@
     "configure": "node-pre-gyp configure",
     "install": "node-pre-gyp install --fallback-to-build --loglevel verbose",
     "rebuild": "node-pre-gyp rebuild --loglevel verbose",
-    "make:wasm": "docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) emscripten/emsdk emmake make",
-    "build:wasm": "yarn make:wasm build",
-    "rebuild:wasm": "yarn make:wasm rebuild",
-    "clean:wasm": "yarn make:wasm clean",
-    "clean-cache:wasm": "yarn make:wasm clean-cache",
-    "workflows": "node script/workflows.js",
+    "wasm:make": "docker run --rm -v $(pwd):/src -u $(id -u):$(id -g) emscripten/emsdk emmake make",
+    "wasm:build": "yarn wasm:make build",
+    "wasm:rebuild": "yarn wasm:make rebuild",
+    "wasm:clean": "yarn wasm:make clean",
+    "wasm:clean-cache": "yarn wasm:make clean-cache",
+    "generate:workflows:win": "node script/generate-workflows.js",
+    "generate:workflows:no-win": "node script/generate-non-win-workflows.js",
+    "generate:workflows": "npm run generate:workflows:win && npm run generate:workflows:no-win",
+    "generate:build": "node script/utils/generate.js",
     "test": "mocha --timeout 5000",
     "binary:build": "node-pre-gyp rebuild package",
     "binary:publish": "AWS_PROFILE=supabase-dev node-pre-gyp publish"
@@ -54,6 +57,7 @@
     "@yamlize/cli": "^0.8.0",
     "chai": "^3.5.0",
     "emnapi": "^0.43.1",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.15",
     "mocha": "^5.2.0",
     "rimraf": "5.0.0"
@@ -61,7 +65,7 @@
   "dependencies": {
     "@emnapi/runtime": "^0.43.1",
     "@mapbox/node-pre-gyp": "^1.0.8",
-    "@pgsql/types": "^15.0.1",
+    "@pgsql/types": "15.0.2",
     "node-addon-api": "^7.0.0",
     "node-gyp": "^10.0.1"
   },

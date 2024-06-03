@@ -1,4 +1,4 @@
-name: Build and Test 🛠
+name: Generated Build libpg-query no windows 🛠
 'on':
   workflow_dispatch: null
 jobs:
@@ -17,10 +17,6 @@ jobs:
         with:
           node-version: 20.x
           cache: yarn
-      - name: Configure Git 🛠
-        run: |
-          git config user.name "Cosmology"
-          git config user.email "developers@cosmology.zone"
       - name: Install and Build 📦
         run: |
           yarn
